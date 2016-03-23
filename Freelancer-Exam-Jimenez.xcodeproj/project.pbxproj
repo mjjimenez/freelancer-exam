@@ -13,6 +13,10 @@
 		BE7771641CA226A0009D8668 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE7771621CA226A0009D8668 /* Main.storyboard */; };
 		BE7771661CA226A0009D8668 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7771651CA226A0009D8668 /* Assets.xcassets */; };
 		BE7771691CA226A0009D8668 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE7771671CA226A0009D8668 /* LaunchScreen.storyboard */; };
+		BE7771761CA23040009D8668 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7771751CA23040009D8668 /* WebService.m */; };
+		BE77717A1CA2310A009D8668 /* TVShowsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7771791CA2310A009D8668 /* TVShowsListViewController.m */; };
+		BE77717E1CA23181009D8668 /* TVShow.m in Sources */ = {isa = PBXBuildFile; fileRef = BE77717D1CA23181009D8668 /* TVShow.m */; };
+		BE7771811CA2364C009D8668 /* TVShowWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7771801CA2364C009D8668 /* TVShowWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,14 @@
 		BE7771651CA226A0009D8668 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE7771681CA226A0009D8668 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE77716A1CA226A0009D8668 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE7771741CA23040009D8668 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
+		BE7771751CA23040009D8668 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
+		BE7771781CA2310A009D8668 /* TVShowsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowsListViewController.h; sourceTree = "<group>"; };
+		BE7771791CA2310A009D8668 /* TVShowsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowsListViewController.m; sourceTree = "<group>"; };
+		BE77717C1CA23181009D8668 /* TVShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShow.h; sourceTree = "<group>"; };
+		BE77717D1CA23181009D8668 /* TVShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShow.m; sourceTree = "<group>"; };
+		BE77717F1CA2364C009D8668 /* TVShowWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowWrapper.h; sourceTree = "<group>"; };
+		BE7771801CA2364C009D8668 /* TVShowWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowWrapper.m; sourceTree = "<group>"; };
 		D2D333B1658B059C66C68875 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -111,6 +123,7 @@
 		BE7771711CA229E2009D8668 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BE7771731CA23023009D8668 /* Web Service */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -118,8 +131,39 @@
 		BE7771721CA229E2009D8668 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				BE7771771CA230F5009D8668 /* TV Shows List */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		BE7771731CA23023009D8668 /* Web Service */ = {
+			isa = PBXGroup;
+			children = (
+				BE7771741CA23040009D8668 /* WebService.h */,
+				BE7771751CA23040009D8668 /* WebService.m */,
+			);
+			path = "Web Service";
+			sourceTree = "<group>";
+		};
+		BE7771771CA230F5009D8668 /* TV Shows List */ = {
+			isa = PBXGroup;
+			children = (
+				BE77717B1CA2316C009D8668 /* Model */,
+				BE7771781CA2310A009D8668 /* TVShowsListViewController.h */,
+				BE7771791CA2310A009D8668 /* TVShowsListViewController.m */,
+			);
+			path = "TV Shows List";
+			sourceTree = "<group>";
+		};
+		BE77717B1CA2316C009D8668 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BE77717C1CA23181009D8668 /* TVShow.h */,
+				BE77717D1CA23181009D8668 /* TVShow.m */,
+				BE77717F1CA2364C009D8668 /* TVShowWrapper.h */,
+				BE7771801CA2364C009D8668 /* TVShowWrapper.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,8 +287,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE7771811CA2364C009D8668 /* TVShowWrapper.m in Sources */,
+				BE7771761CA23040009D8668 /* WebService.m in Sources */,
 				BE77715E1CA226A0009D8668 /* AppDelegate.m in Sources */,
 				BE77715B1CA226A0009D8668 /* main.m in Sources */,
+				BE77717A1CA2310A009D8668 /* TVShowsListViewController.m in Sources */,
+				BE77717E1CA23181009D8668 /* TVShow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
