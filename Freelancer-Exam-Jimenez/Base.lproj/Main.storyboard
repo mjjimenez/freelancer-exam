@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Show Detail View Controller-->
@@ -16,8 +17,45 @@
                     <view key="view" contentMode="scaleToFill" id="rLx-JJ-KGc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xHO-04-KAI">
+                                <rect key="frame" x="0.0" y="64" width="600" height="194"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="194" id="roR-Fu-fJA"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUMMARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocd-ph-2jR">
+                                <rect key="frame" x="20" y="266" width="89" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywl-8G-fWM">
+                                <rect key="frame" x="20" y="295" width="560" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="43f-Xv-IZG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xHO-04-KAI" firstAttribute="top" secondItem="8os-hL-vgG" secondAttribute="bottom" id="MND-qc-sk1"/>
+                            <constraint firstItem="Ywl-8G-fWM" firstAttribute="leading" secondItem="Ocd-ph-2jR" secondAttribute="leading" id="QWF-OR-cJY"/>
+                            <constraint firstItem="Ywl-8G-fWM" firstAttribute="centerX" secondItem="xHO-04-KAI" secondAttribute="centerX" id="TL7-hU-e4U"/>
+                            <constraint firstItem="Ywl-8G-fWM" firstAttribute="top" secondItem="Ocd-ph-2jR" secondAttribute="bottom" constant="8" symbolic="YES" id="Uuf-el-nkW"/>
+                            <constraint firstAttribute="trailing" secondItem="xHO-04-KAI" secondAttribute="trailing" id="ics-rB-HbD"/>
+                            <constraint firstItem="xHO-04-KAI" firstAttribute="leading" secondItem="rLx-JJ-KGc" secondAttribute="leading" id="jjN-ob-0xO"/>
+                            <constraint firstItem="Ocd-ph-2jR" firstAttribute="top" secondItem="xHO-04-KAI" secondAttribute="bottom" constant="8" symbolic="YES" id="maG-JF-24W"/>
+                            <constraint firstItem="Ocd-ph-2jR" firstAttribute="leading" secondItem="rLx-JJ-KGc" secondAttribute="leadingMargin" id="mcS-KI-Whb"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tvShowDescription" destination="Ywl-8G-fWM" id="faa-tR-tXy"/>
+                        <outlet property="tvShowImageView" destination="xHO-04-KAI" id="AiG-O1-rEG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ffd-JA-Znx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

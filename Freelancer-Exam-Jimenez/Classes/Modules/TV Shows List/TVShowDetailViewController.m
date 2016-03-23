@@ -11,6 +11,8 @@
 @interface TVShowDetailViewController()
 
 @property (strong, nonatomic) NSDictionary *tvShowResultsDictionary;
+@property (weak, nonatomic) IBOutlet UIImageView *tvShowImageView;
+@property (weak, nonatomic) IBOutlet UILabel *tvShowDescription;
 
 @end
 
@@ -18,6 +20,8 @@
 
 - (void)viewDidLoad
 {
+    self.tvShowImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     
@@ -36,6 +40,11 @@
             
             strongSelf.tvShowResultsDictionary = resultsDictionary;
             
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf displayTVShowDetails];
+            });
+            
+            
         } else {
             
             
@@ -50,6 +59,18 @@
     
     [dataTask resume];
     
+}
+
+- (void)displayTVShowDetails
+{
+    NSString *imageURLString = self.tvShowResultsDictionary[@"Poster"];
+    NSURL *imageURL = [NSURL URLWithString:imageURLString];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+    
+    self.tvShowImageView.image = image;
+    
+    self.tvShowDescription.text = self.tvShowResultsDictionary[@"Plot"];
+
 }
 
 @end
