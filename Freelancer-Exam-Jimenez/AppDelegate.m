@@ -18,9 +18,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    UIColor *navbarColor = [UIColor colorWithRed:24.0 green:147.0 blue:200 alpha:1.0];
+    UIColor *navbarColor = [UIColor colorWithRed:(24.0/255) green:(147.0/255) blue:(200.0/255) alpha:1.0];
     [[UINavigationBar appearance] setBarTintColor:navbarColor];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
     return YES;
 }

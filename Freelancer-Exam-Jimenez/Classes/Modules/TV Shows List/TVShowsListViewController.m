@@ -29,21 +29,11 @@
 
 @implementation TVShowsListViewController
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    UIColor *navbarColor = [UIColor colorWithRed:24.0 green:147.0 blue:200 alpha:1.0];
-    [self.navigationController.navigationBar setBarTintColor:navbarColor];
-    [self.navigationController.navigationBar setTranslucent:NO];
-    
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.title = @"My Movies";
 
     //Initial state
     self.currentPage = 1;
