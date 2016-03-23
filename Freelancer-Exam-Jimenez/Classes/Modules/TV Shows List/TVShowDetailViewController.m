@@ -57,7 +57,9 @@
             
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"TV Show Not Found" preferredStyle:UIAlertControllerStyleAlert];
             
-            [strongSelf presentViewController:alertController animated:YES completion:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf presentViewController:alertController animated:YES completion:nil];
+            });
             
         }
         
