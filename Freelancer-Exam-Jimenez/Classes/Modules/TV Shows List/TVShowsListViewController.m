@@ -7,6 +7,7 @@
 //
 
 #import "TVShowsListViewController.h"
+#import "TVShowDetailViewController.h"
 #import "TVShow.h"
 #import "TVShowWrapper.h"
 #import "TVShowTableViewCell.h"
@@ -18,6 +19,8 @@
 @property (assign, nonatomic) NSInteger currentPage;
 @property (strong, nonatomic) UIView *loadingFooterView;
 @property BOOL isLoadingNextPage;
+
+@property (copy, nonatomic) TVShow *selectedTVShow;
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSDate *currentDate;
@@ -194,6 +197,14 @@
     }
 }
 
+#pragma mark - UITableViewDelegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedTVShow = self.sectionedTVShows[indexPath.section][indexPath.row];
+    [self performSegueWithIdentifier:@"ShowTVShowDetail" sender:self];
+}
+
 #pragma mark - UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -207,6 +218,17 @@
         [self loadNextPageOfTVShows];
         self.tableView.tableFooterView = self.loadingFooterView;
         
+    }
+}
+
+#pragma mark - Storyboard Segue Methods
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowTVShowDetail"]) {
+        
+        TVShowDetailViewController *detailViewController = (TVShowDetailViewController *)segue.destinationViewController;
+        detailViewController.tvShow = self.selectedTVShow;
     }
 }
 

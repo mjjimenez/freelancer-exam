@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Show Detail View Controller-->
         <scene sceneID="37G-jQ-LTv">
             <objects>
-                <viewController id="70A-1l-wwn" sceneMemberID="viewController">
+                <viewController id="70A-1l-wwn" customClass="TVShowDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8os-hL-vgG"/>
                         <viewControllerLayoutGuide type="bottom" id="1z9-tS-XMf"/>
@@ -111,6 +111,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="TIf-3T-5M7"/>
+                    <connections>
+                        <segue destination="70A-1l-wwn" kind="show" identifier="ShowTVShowDetail" id="Ob4-SE-XeF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OzK-Q0-qM3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

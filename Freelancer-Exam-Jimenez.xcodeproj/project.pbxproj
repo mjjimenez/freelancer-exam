@@ -18,6 +18,7 @@
 		BE77717E1CA23181009D8668 /* TVShow.m in Sources */ = {isa = PBXBuildFile; fileRef = BE77717D1CA23181009D8668 /* TVShow.m */; };
 		BE7771811CA2364C009D8668 /* TVShowWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7771801CA2364C009D8668 /* TVShowWrapper.m */; };
 		BE7771851CA24238009D8668 /* TVShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7771841CA24238009D8668 /* TVShowTableViewCell.m */; };
+		BE7771881CA25155009D8668 /* TVShowDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7771871CA25155009D8668 /* TVShowDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		BE7771801CA2364C009D8668 /* TVShowWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowWrapper.m; sourceTree = "<group>"; };
 		BE7771831CA24238009D8668 /* TVShowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowTableViewCell.h; sourceTree = "<group>"; };
 		BE7771841CA24238009D8668 /* TVShowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowTableViewCell.m; sourceTree = "<group>"; };
+		BE7771861CA25155009D8668 /* TVShowDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowDetailViewController.h; sourceTree = "<group>"; };
+		BE7771871CA25155009D8668 /* TVShowDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowDetailViewController.m; sourceTree = "<group>"; };
 		D2D333B1658B059C66C68875 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -155,6 +158,8 @@
 				BE77717B1CA2316C009D8668 /* Model */,
 				BE7771781CA2310A009D8668 /* TVShowsListViewController.h */,
 				BE7771791CA2310A009D8668 /* TVShowsListViewController.m */,
+				BE7771861CA25155009D8668 /* TVShowDetailViewController.h */,
+				BE7771871CA25155009D8668 /* TVShowDetailViewController.m */,
 			);
 			path = "TV Shows List";
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				BE7771761CA23040009D8668 /* WebService.m in Sources */,
 				BE7771851CA24238009D8668 /* TVShowTableViewCell.m in Sources */,
 				BE77715E1CA226A0009D8668 /* AppDelegate.m in Sources */,
+				BE7771881CA25155009D8668 /* TVShowDetailViewController.m in Sources */,
 				BE77715B1CA226A0009D8668 /* main.m in Sources */,
 				BE77717A1CA2310A009D8668 /* TVShowsListViewController.m in Sources */,
 				BE77717E1CA23181009D8668 /* TVShow.m in Sources */,
