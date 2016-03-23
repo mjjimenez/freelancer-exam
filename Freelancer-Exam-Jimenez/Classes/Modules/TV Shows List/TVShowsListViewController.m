@@ -19,9 +19,13 @@
 @property (strong, nonatomic) UIView *loadingFooterView;
 @property BOOL isLoadingNextPage;
 
+@property (strong, nonatomic) NSDateFormatter *dateFormatter;
+@property (strong, nonatomic) NSDate *currentDate;
+
 @end
 
 @implementation TVShowsListViewController
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -39,6 +43,7 @@
     //Initial state
     self.currentPage = 1;
     self.sectionedTVShows = [NSMutableArray array];
+    self.currentDate = [NSDate date];
     
     //Table View state
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -49,6 +54,34 @@
 
     [self loadNextPageOfTVShows];
     
+}
+
+#pragma mark - Lazy loaded properties
+
+- (NSDateFormatter *)dateFormatter
+{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        [_dateFormatter setDateFormat:@"YYYY-dd-MM"];
+    }
+    
+    return _dateFormatter;
+}
+
+- (UIView *)loadingFooterView
+{
+    if (!_loadingFooterView) {
+        _loadingFooterView = [[UIView alloc] init];
+        _loadingFooterView.frame = CGRectMake(0, 0, self.tableView.bounds.size.width, 40);
+        _loadingFooterView.backgroundColor = [UIColor lightGrayColor];
+        
+        UIActivityIndicatorView *loadingIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [loadingIndicatorView startAnimating];
+        [_loadingFooterView addSubview:loadingIndicatorView];
+        loadingIndicatorView.center = CGPointMake(CGRectGetMidX(_loadingFooterView.frame), CGRectGetMidY(_loadingFooterView.frame));
+    }
+    
+    return _loadingFooterView;
 }
 
 #pragma mark - TVShow Business Logic
@@ -115,22 +148,6 @@
 
 #pragma mark - View Logic
 
-- (UIView *)loadingFooterView
-{
-    if (!_loadingFooterView) {
-        _loadingFooterView = [[UIView alloc] init];
-        _loadingFooterView.frame = CGRectMake(0, 0, self.tableView.bounds.size.width, 40);
-        _loadingFooterView.backgroundColor = [UIColor lightGrayColor];
-        
-        UIActivityIndicatorView *loadingIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        [loadingIndicatorView startAnimating];
-        [_loadingFooterView addSubview:loadingIndicatorView];
-        loadingIndicatorView.center = CGPointMake(CGRectGetMidX(_loadingFooterView.frame), CGRectGetMidY(_loadingFooterView.frame));
-    }
-    
-    return _loadingFooterView;
-}
-
 #pragma mark - UITableViewDataSource Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -160,7 +177,21 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return nil;
+    if (section == 0) {
+        return @"TONIGHT";
+    } else {
+        
+        NSInteger daysToRemoveFromCurrentDate = section + 1;
+        
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        dateComponents.day = -daysToRemoveFromCurrentDate;
+        NSDate *sectionDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:self.currentDate options:0];
+        
+        NSString *headerString = [self.dateFormatter stringFromDate:sectionDate];
+        
+        return headerString;
+        
+    }
 }
 
 #pragma mark - UIScrollViewDelegate Methods
