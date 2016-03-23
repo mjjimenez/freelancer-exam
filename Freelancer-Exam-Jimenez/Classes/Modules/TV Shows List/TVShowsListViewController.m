@@ -125,7 +125,17 @@
             
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"Network error. Please Try again." preferredStyle:UIAlertControllerStyleAlert];
             
-            [strongSelf presentViewController:alertController animated:YES completion:nil];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Try again" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                [strongSelf loadNextPageOfTVShows];
+                
+            }]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf presentViewController:alertController animated:YES completion:nil];
+            });
+            
             
             
         }
