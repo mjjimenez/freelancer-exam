@@ -9,6 +9,7 @@
 #import "TVShowsListViewController.h"
 #import "TVShow.h"
 #import "TVShowWrapper.h"
+#import "TVShowTableViewCell.h"
 
 @interface TVShowsListViewController()
 
@@ -33,16 +34,19 @@
     [super viewDidLoad];
     
 
-    //Initia state
+    //Initial state
     self.currentPage = 1;
     self.sectionedTVShows = [NSMutableArray array];
+    
+    //Table View state
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 96;
     
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     self.tvShowsAPISession = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     
     NSString *tvShowsURLString = [NSString stringWithFormat:@"https://www.whatsbeef.net/wabz/guide.php?start=%ld", (long)self.currentPage];
     NSURL *tvShowsURL = [NSURL URLWithString:tvShowsURLString];
-    
     
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask *initialPageTVShowsTask = [self.tvShowsAPISession dataTaskWithURL:tvShowsURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -54,11 +58,18 @@
         NSError *jsonSerializationError;
         TVShowWrapper *tvShowWrapper = [MTLJSONAdapter modelOfClass:[TVShowWrapper class] fromJSONDictionary:resultsDictionary error:&jsonSerializationError];
         
-        if (!error && !jsonSerializationError) {
+        if (!error && !jsonSerializationError && resultsDictionary != nil) {
             
             [self sectionTVShowsFromResults:tvShowWrapper page:strongSelf.currentPage];
             
             strongSelf.currentPage++;
+            
+        } else {
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"Network error. Please Try again." preferredStyle:UIAlertControllerStyleAlert];
+            
+            [strongSelf presentViewController:alertController animated:YES completion:nil];
+            
             
         }
         
@@ -96,9 +107,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *tvShowCell = [tableView dequeueReusableCellWithIdentifier:@"TVShowCell" forIndexPath:indexPath];
+    TVShowTableViewCell *tvShowCell = [tableView dequeueReusableCellWithIdentifier:@"TVShowCell" forIndexPath:indexPath];
     
-    tvShowCell.textLabel.text = self.sectionedTVShows[indexPath.section][indexPath.row].name;
+    TVShow *tvShow = self.sectionedTVShows[indexPath.section][indexPath.row];
+    
+    tvShowCell.channelImageView.image = [UIImage imageNamed:tvShow.channel];
+    tvShowCell.ratingImageView.image = [UIImage imageNamed:tvShow.rating];
+    tvShowCell.tvShowNameLabel.text = tvShow.name;
+    tvShowCell.timeSlotLabel.text = [NSString stringWithFormat:@"%@ - %@", tvShow.startTime, tvShow.endTime];
     
     return tvShowCell;
     
@@ -107,6 +123,22 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return nil;
+}
+
+#pragma mark - UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat scrollViewHeight = scrollView.frame.size.height;
+    CGFloat contentYoffset = scrollView.contentOffset.y;
+    CGFloat distanceFromBottom = scrollView.contentSize.height - contentYoffset;
+    
+    if (distanceFromBottom <= (scrollViewHeight + 100)) {
+        
+        NSLog(@"Load next page");
+        //TODO: Load next page.
+        
+    }
 }
 
 @end
