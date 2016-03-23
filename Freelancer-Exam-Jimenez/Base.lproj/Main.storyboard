@@ -39,22 +39,63 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ajd-XK-s05">
+                                <rect key="frame" x="0.0" y="64" width="600" height="194"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Show Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nee-4G-6dW">
+                                        <rect key="frame" x="20" y="51" width="200" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Slot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZ8-dm-FqH">
+                                        <rect key="frame" x="20" y="107" width="73" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oer-pg-bQp">
+                                        <rect key="frame" x="227" y="51" width="33" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="Fyd-Zz-6XP"/>
+                                            <constraint firstAttribute="width" constant="33" id="YoG-dY-aKc"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="nee-4G-6dW" firstAttribute="leading" secondItem="Ajd-XK-s05" secondAttribute="leading" constant="20" id="9Gu-r0-gfS"/>
+                                    <constraint firstItem="Oer-pg-bQp" firstAttribute="top" secondItem="nee-4G-6dW" secondAttribute="top" id="bPZ-Dd-Gpj"/>
+                                    <constraint firstAttribute="height" constant="194" id="h4l-WZ-RkT"/>
+                                    <constraint firstItem="nee-4G-6dW" firstAttribute="top" secondItem="Ajd-XK-s05" secondAttribute="top" constant="51" id="nWa-DW-vOp"/>
+                                    <constraint firstItem="AZ8-dm-FqH" firstAttribute="leading" secondItem="nee-4G-6dW" secondAttribute="leading" id="q8l-8S-DZA"/>
+                                    <constraint firstItem="Oer-pg-bQp" firstAttribute="leading" secondItem="nee-4G-6dW" secondAttribute="trailing" constant="7" id="rYr-Ys-v6y"/>
+                                    <constraint firstItem="AZ8-dm-FqH" firstAttribute="top" secondItem="nee-4G-6dW" secondAttribute="bottom" constant="21" id="xiB-Wy-gbL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Ajd-XK-s05" firstAttribute="top" secondItem="8os-hL-vgG" secondAttribute="bottom" id="0ZL-dZ-x8G"/>
                             <constraint firstItem="xHO-04-KAI" firstAttribute="top" secondItem="8os-hL-vgG" secondAttribute="bottom" id="MND-qc-sk1"/>
                             <constraint firstItem="Ywl-8G-fWM" firstAttribute="leading" secondItem="Ocd-ph-2jR" secondAttribute="leading" id="QWF-OR-cJY"/>
                             <constraint firstItem="Ywl-8G-fWM" firstAttribute="centerX" secondItem="xHO-04-KAI" secondAttribute="centerX" id="TL7-hU-e4U"/>
                             <constraint firstItem="Ywl-8G-fWM" firstAttribute="top" secondItem="Ocd-ph-2jR" secondAttribute="bottom" constant="8" symbolic="YES" id="Uuf-el-nkW"/>
+                            <constraint firstAttribute="trailing" secondItem="Ajd-XK-s05" secondAttribute="trailing" id="cqu-bN-3Um"/>
                             <constraint firstAttribute="trailing" secondItem="xHO-04-KAI" secondAttribute="trailing" id="ics-rB-HbD"/>
                             <constraint firstItem="xHO-04-KAI" firstAttribute="leading" secondItem="rLx-JJ-KGc" secondAttribute="leading" id="jjN-ob-0xO"/>
                             <constraint firstItem="Ocd-ph-2jR" firstAttribute="top" secondItem="xHO-04-KAI" secondAttribute="bottom" constant="8" symbolic="YES" id="maG-JF-24W"/>
                             <constraint firstItem="Ocd-ph-2jR" firstAttribute="leading" secondItem="rLx-JJ-KGc" secondAttribute="leadingMargin" id="mcS-KI-Whb"/>
+                            <constraint firstItem="Ajd-XK-s05" firstAttribute="leading" secondItem="rLx-JJ-KGc" secondAttribute="leading" id="xRQ-qt-5wj"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="timeSlotLabel" destination="AZ8-dm-FqH" id="TR6-aR-aeT"/>
+                        <outlet property="tvRatingsImageView" destination="Oer-pg-bQp" id="Zcp-xc-yjN"/>
                         <outlet property="tvShowDescription" destination="Ywl-8G-fWM" id="faa-tR-tXy"/>
+                        <outlet property="tvShowImageCoverView" destination="Ajd-XK-s05" id="bsy-pC-kdx"/>
                         <outlet property="tvShowImageView" destination="xHO-04-KAI" id="AiG-O1-rEG"/>
+                        <outlet property="tvShowNameLabel" destination="nee-4G-6dW" id="ieL-tF-xOG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ffd-JA-Znx" userLabel="First Responder" sceneMemberID="firstResponder"/>

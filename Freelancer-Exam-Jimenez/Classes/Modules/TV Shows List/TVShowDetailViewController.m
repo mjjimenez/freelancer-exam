@@ -12,7 +12,11 @@
 
 @property (strong, nonatomic) NSDictionary *tvShowResultsDictionary;
 @property (weak, nonatomic) IBOutlet UIImageView *tvShowImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *tvRatingsImageView;
+@property (weak, nonatomic) IBOutlet UIView *tvShowImageCoverView;
 @property (weak, nonatomic) IBOutlet UILabel *tvShowDescription;
+@property (weak, nonatomic) IBOutlet UILabel *tvShowNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeSlotLabel;
 
 @end
 
@@ -21,6 +25,9 @@
 - (void)viewDidLoad
 {
     self.tvShowImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.tvShowImageCoverView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+    
+    self.title = self.tvShow.name;
     
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration];
@@ -70,6 +77,9 @@
     self.tvShowImageView.image = image;
     
     self.tvShowDescription.text = self.tvShowResultsDictionary[@"Plot"];
+    self.tvShowNameLabel.text = self.tvShow.name;
+    self.timeSlotLabel.text = [NSString stringWithFormat:@"%@ - %@", self.tvShow.startTime, self.tvShow.endTime];
+    self.tvRatingsImageView.image = [UIImage imageNamed:self.tvShow.rating];
 
 }
 
