@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSMutableArray<NSArray<TVShow* > *> *sectionedTVShows;
 @property (copy, nonatomic) NSURLSession *tvShowsAPISession;
 @property (assign, nonatomic) NSInteger currentPage;
+@property (strong, nonatomic) UIView *loadingFooterView;
+@property BOOL isLoadingNextPage;
 
 @end
 
@@ -44,9 +46,26 @@
     
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     self.tvShowsAPISession = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+
+    [self loadNextPageOfTVShows];
     
+}
+
+#pragma mark - TVShow Business Logic
+
+- (NSURL *)currentPageURL
+{
     NSString *tvShowsURLString = [NSString stringWithFormat:@"https://www.whatsbeef.net/wabz/guide.php?start=%ld", (long)self.currentPage];
     NSURL *tvShowsURL = [NSURL URLWithString:tvShowsURLString];
+    
+    return tvShowsURL;
+}
+
+- (void)loadNextPageOfTVShows
+{
+    self.isLoadingNextPage = YES;
+    
+    NSURL *tvShowsURL = [self currentPageURL];
     
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask *initialPageTVShowsTask = [self.tvShowsAPISession dataTaskWithURL:tvShowsURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -73,12 +92,12 @@
             
         }
         
+        strongSelf.isLoadingNextPage = NO;
+        
     }];
     
     [initialPageTVShowsTask resume];
 }
-
-#pragma mark - TVShow Business Logic
 
 - (void)sectionTVShowsFromResults:(TVShowWrapper *)tvShowWrapper page:(NSInteger)page
 {
@@ -89,8 +108,27 @@
     dispatch_async(dispatch_get_main_queue(), ^{
        
         [self.tableView reloadData];
+        self.tableView.tableFooterView = nil;
         
     });
+}
+
+#pragma mark - View Logic
+
+- (UIView *)loadingFooterView
+{
+    if (!_loadingFooterView) {
+        _loadingFooterView = [[UIView alloc] init];
+        _loadingFooterView.frame = CGRectMake(0, 0, self.tableView.bounds.size.width, 40);
+        _loadingFooterView.backgroundColor = [UIColor lightGrayColor];
+        
+        UIActivityIndicatorView *loadingIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [loadingIndicatorView startAnimating];
+        [_loadingFooterView addSubview:loadingIndicatorView];
+        loadingIndicatorView.center = CGPointMake(CGRectGetMidX(_loadingFooterView.frame), CGRectGetMidY(_loadingFooterView.frame));
+    }
+    
+    return _loadingFooterView;
 }
 
 #pragma mark - UITableViewDataSource Methods
@@ -133,10 +171,10 @@
     CGFloat contentYoffset = scrollView.contentOffset.y;
     CGFloat distanceFromBottom = scrollView.contentSize.height - contentYoffset;
     
-    if (distanceFromBottom <= (scrollViewHeight + 100)) {
+    if (distanceFromBottom <= (scrollViewHeight + 100) && !self.isLoadingNextPage) {
         
-        NSLog(@"Load next page");
-        //TODO: Load next page.
+        [self loadNextPageOfTVShows];
+        self.tableView.tableFooterView = self.loadingFooterView;
         
     }
 }

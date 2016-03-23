@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Mantle/Mantle.h>
+
+typedef void(^WebServiceCompletionHandler)(id, NSError*);
 
 @interface WebService : NSObject
+
+@property (strong, nonatomic) MTLModel<MTLJSONSerializing> *requestBodyObject;
+
+- (void)startRequestWithCompletionHandler:(WebServiceCompletionHandler)completionHandler;
 
 @end
